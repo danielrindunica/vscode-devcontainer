@@ -27,7 +27,7 @@ jobs:
       with:
        registry: ghcr.io
        username: ${{ github.actor }}
-       password: ${{ secrets.TOKEN }}
+       password: ${{ secrets.GITHUB_TOKEN }}
        
     - uses: actions/checkout@v4
     - name: Push the Docker image
