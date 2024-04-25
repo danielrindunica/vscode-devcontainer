@@ -22,6 +22,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Login to GitHub Container Registry
+    - uses: docker/login-action@v3
+     with:
+       registry: ghcr.io
+         username: ${{ github.actor }}
+         password: ${{ secrets.TOKEN }}
     - uses: actions/checkout@v4
     - name: Push the Docker image
-      run: echo $TOKEN | docker login ghcr.io -u danielrindunica --password-stdin && docker push ghcr.io/danielrindunica/devcontainer:latest
+      run: docker push ghcr.io/danielrindunica/devcontainer:latest
