@@ -17,3 +17,15 @@ RUN cd /tmp && \
    wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-473.0.0-linux-x86_64.tar.gz && \
    tar -xf google-cloud-cli-473.0.0-linux-x86_64.tar.gz && \
    ./google-cloud-sdk/install.sh --quiet
+
+# Download and install Terraform
+RUN cd /tmp && \
+    wget https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip && \
+    unzip terraform_1.8.2_linux_amd64.zip && \
+    cp terraform /usr/bin/
+
+# Download and install Docker
+RUN cd /tmp && \
+    wget https://download.docker.com/linux/static/stable/x86_64/docker-26.1.0.tgz && \
+    tar -xzvf docker-26.1.0.tgz && \
+    cp docker/* /usr/bin/
