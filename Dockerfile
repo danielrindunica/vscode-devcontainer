@@ -15,12 +15,12 @@ RUN apt update && \
 
 # Download and install Terraform
 RUN wget -O- https://apt.releases.hashicorp.com/gpg | \
-gpg --dearmor | \
-tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+    gpg --dearmor | \
+    tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 
 RUN echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-tee /etc/apt/sources.list.d/hashicorp.list
+    https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+    tee /etc/apt/sources.list.d/hashicorp.list
 
 RUN apt update && \
     apt install -y terraform
@@ -28,11 +28,13 @@ RUN apt update && \
 # Download and install kubectl
 
 RUN mkdir -p -m 755 /etc/apt/keyrings && \
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
-chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | \
+    gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+    chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 
-RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list && \
-chmod 644 /etc/apt/sources.list.d/kubernetes.list
+RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | \
+    tee /etc/apt/sources.list.d/kubernetes.list && \
+    chmod 644 /etc/apt/sources.list.d/kubernetes.list
 
 RUN apt update && \
     apt install -y kubectl
