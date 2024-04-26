@@ -1,3 +1,9 @@
 {
-    "image": "ghcr.io/danielrindunica/devcontainer:latest"
+    "image": "ghcr.io/danielrindunica/devcontainer:latest""customizations": {
+        "vscode": {
+            "extensions": [
+                "HashiCorp.terraform"
+            ]
+        }
+    }
 }
