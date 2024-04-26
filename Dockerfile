@@ -1,34 +1,38 @@
-FROM alpine:latest
+FROM google/cloud-sdk:latest
 
 # Set the locale to C
 ENV LANG C
 ENV LC_ALL C
 
 # Update package list and install required packages
-RUN apk update && \
-    apk add git \
-            openssh-client \
-            python3 \
-            wget \
-            bash
-
-# Download and install Google Cloud SDK
-RUN cd /opt && \
-   wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-473.0.0-linux-x86_64.tar.gz && \
-   tar -xf google-cloud-cli-473.0.0-linux-x86_64.tar.gz && \
-   bash -c ./google-cloud-sdk/install.sh --quiet && \
-   rm -rf google-cloud-cli-473.0.0-linux-x86_64.tar.gz
+RUN apt update && \
+    apt install -y apt-transport-https \
+    ca-certificates \
+    gnupg \
+    software-properties-common \
+    curl \
+    wget
 
 # Download and install Terraform
-RUN cd /tmp && \
-    wget https://releases.hashicorp.com/terraform/1.8.2/terraform_1.8.2_linux_amd64.zip && \
-    unzip terraform_1.8.2_linux_amd64.zip && \
-    cp terraform /usr/bin/ && \
-    rm -rf /tmp/*
+RUN wget -O- https://apt.releases.hashicorp.com/gpg | \
+gpg --dearmor | \
+tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 
-# Download and install Docker
-RUN cd /tmp && \
-    wget https://download.docker.com/linux/static/stable/x86_64/docker-26.1.0.tgz && \
-    tar -xzvf docker-26.1.0.tgz && \
-    cp docker/* /usr/bin/ && \
-    rm -rf /tmp/*
+RUN echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+tee /etc/apt/sources.list.d/hashicorp.list
+
+RUN apt update && \
+    apt install -y terraform
+
+# Download and install kubectl
+
+RUN mkdir -p -m 755 /etc/apt/keyrings && \
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg && \
+chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+RUN echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | tee /etc/apt/sources.list.d/kubernetes.list && \
+chmod 644 /etc/apt/sources.list.d/kubernetes.list
+
+RUN apt update && \
+    apt install -y kubectl
