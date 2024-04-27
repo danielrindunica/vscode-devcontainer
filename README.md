@@ -1,7 +1,6 @@
 # vscode-devcontainer
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/danielrindunica/vscode-devcontainer)
-[![GitHub Actions](https://github.com/danielrindunica/vscode-devcontainer/workflows/CI/badge.svg)](https://github.com/danielrindunica/vscode-devcontainer/actions)
 ![GitHub issues](https://img.shields.io/github/issues-raw/danielrindunica/vscode-devcontainer)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/danielrindunica/vscode-devcontainer)
 ![GitHub](https://img.shields.io/github/license/danielrindunica/vscode-devcontainer)
