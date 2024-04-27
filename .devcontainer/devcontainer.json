@@ -1,8 +1,13 @@
 {
-    "image": "ghcr.io/danielrindunica/devcontainer:latest""customizations": {
+    "image": "ghcr.io/danielrindunica/devcontainer:latest",
+    "customizations": {
         "vscode": {
             "extensions": [
-                "HashiCorp.terraform"
+                "HashiCorp.terraform",
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.debugpy"
             ]
         }
     }
