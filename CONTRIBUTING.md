@@ -51,7 +51,7 @@ If you have any questions or need further assistance, feel free to reach out to 
 If you have questions, feedback, suggestions, or just want to say hello, feel free to reach out:
 
 - Email: [rindunicadanielnicolae@outlook.com](mailto:rindunicadanielnicolae@outlook.com)
-- LinkedIn: [Daniel Rindunica](https://www.linkedin.com/in/rindunicadaniel)
+- LinkedIn: [Daniel Rindunica](https://www.linkedin.com/in/danielrindunica/)
 - GitHub: [danielrindunica](https://github.com/danielrindunica)
 
 We value your input and would love to hear from you!
